@@ -11,7 +11,7 @@ jobs:
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.6
       with:
-        server: mediatek-formation.fr
+        server: bretelle.o2switch.net
         server-dir: /public_html/mediatekformation/
         username: habu7760
         password: ${{ secrets.ftp_password }}
