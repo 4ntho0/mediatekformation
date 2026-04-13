@@ -1,0 +1,46 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+    
+    <form class="form-inline mt-1" method="POST" action="{{ path('admin.categorie.ajout') }}">
+        <div class="form-group mr-1 mb-2">
+            <input type="text" class="sm" name="nom">
+            <button type="submit" class="btn btn-primary mb-2 btn-sm">Ajouter</button>
+        </div>
+    </form>   
+    <table class="table table-striped">
+        <caption>liste des catégories</caption>
+        <thead>
+            <tr>
+                <th>
+                    Nom
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie in categories %}
+                <tr>
+                    <td>
+                        {{ categorie.name }}
+                    </td>
+                    <td>
+                        {% if categorie.formations is empty %}
+                        <a href="{{ path('admin.categorie.suppr', {id: categorie.id}) }}" 
+                           class="btn btn-danger" 
+                           onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')">
+                            Supprimer
+                        </a>
+                    {% else %}
+                        <button class="btn btn-outline-danger" title="Cette catégorie ne peut pas être supprimée car elle est rattachée à une formation.">
+                            Supprimer
+                        </button>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+{% endblock %}
